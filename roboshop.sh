@@ -1,40 +1,24 @@
 #!/bin/bash
 
 AMI_ID="ami-09c813fb71547fc4f"
-SG_ID="sg-0cfc44495ae5411e9" # replace with your SG ID
-INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "frontend")
-ZONE_ID="Z04262502A9244YCHSN99" # replace with your ZONE ID
-DOMAIN_NAME="neeraj.sbs" # replace with your domain
+SG_ID="sg-0cfc44495ae5411e9"
+INSTANCES=("mongodb" "cart" "user" "catalogue" "redis" "mysql" "rabbitmq" "shipping" 
+"payment" "dispatch" "frontend")
+ZONE_ID="Z04262502A9244YCHSN99"
+DOMAIN_NAME="neeraj.sbs"
 
-#for instance in ${INSTANCES[@]}
-for instance in $@
+for instance in ${INSTANCES[@]}
 do
-    INSTANCE_ID=$(aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t3.micro --security-group-ids sg-0cfc44495ae5411e9 --tag-specifications "ResourceType=instance,Tags=[{Key=Name, Value=$instance}]" --query "Instances[0].InstanceId" --output text)
+    aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t3.micro --security-group-ids s
+    g-0cfc44495ae5411e9 --tag-specifications "ResourceType=instance,
+    Tags=[{Key=Name, Value=test}]" --query 'Instances[*].instance_id' --output text
     if [ $instance != "frontend" ]
-    then
-        IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query "Reservations[0].Instances[0].PrivateIpAddress" --output text)
-        RECORD_NAME="$instance.$DOMAIN_NAME"
-    else
-        IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
-        RECORD_NAME="$DOMAIN_NAME"
+    then 
+     IP=aws ec2 describe-instances --instance-ids $INSTANCCE_ID
+     --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text
+    else 
+     IP=aws ec2 describe-instances --instance-ids $INSTANCCE_ID
+     --query 'Reservations[*].Instances[*].PublicIpAddress' --output text
     fi
-    echo "$instance IP address: $IP"
-
-    aws route53 change-resource-record-sets \
-    --hosted-zone-id $ZONE_ID \
-    --change-batch '
-    {
-        "Comment": "Creating or Updating a record set for cognito endpoint"
-        ,"Changes": [{
-        "Action"              : "UPSERT"
-        ,"ResourceRecordSet"  : {
-            "Name"              : "'$RECORD_NAME'"
-            ,"Type"             : "A"
-            ,"TTL"              : 1
-            ,"ResourceRecords"  : [{
-                "Value"         : "'$IP'"
-            }]
-        }
-        }]
-    }'
+    echo "$Instance IP address :$IP"
 done
