@@ -14,10 +14,10 @@ do
     Tags=[{Key=Name, Value=test}]" --query 'Instances[*].instance_id' --output text
     if [ $instance != "frontend" ]
     then 
-     IP=aws ec2 describe-instances --instance-ids $INSTANCCE_ID
+     IP=$aws ec2 describe-instances --instance-ids $INSTANCCE_ID
      --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text
     else 
-     IP=aws ec2 describe-instances --instance-ids $INSTANCCE_ID
+     IP=$aws ec2 describe-instances --instance-ids $INSTANCCE_ID
      --query 'Reservations[*].Instances[*].PublicIpAddress' --output text
     fi
     echo "$Instance IP address :$IP"
