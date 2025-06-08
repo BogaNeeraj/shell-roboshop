@@ -18,18 +18,18 @@ mkdir -p $LOG_FOLDER
 # check the user has root priveleges or not
 if [ $USERID -ne 0 ]
 then 
- echo "$R error:: please run the script with the root user $N"
+ echo -e "$R error:: please run the script with the root user $N"
 else
- echo "$G script started with root user $N"
+ echo -e "$G script started with root user $N"
 fi
 
 VALIDATE(){
 if [ $1 -eq 0 ]
 then 
- echo "$2...$G success " | tee -a $LOG_FILE
+ echo -e "$2...$G success " | tee -a $LOG_FILE
 
 else 
- eccho "$2... $R Failure " | tee -a $LOG_FILE
+ eccho -e "$2... $R Failure " | tee -a $LOG_FILE
 fi 
 }
 
@@ -58,7 +58,7 @@ VALIDATE $? "unzip the files successfully"
 npm install &>>$LOG_FILE
 VALIDATE $? "Instaaling the dependencies"
 
-cp catalogue.service /etc/systemd/system/catalogue.service
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
 VALIDATE $? "Copied service file succcessfully"
 
 systemctl daemon-reload &>>$LOG_FILE
