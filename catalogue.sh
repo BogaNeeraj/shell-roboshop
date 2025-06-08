@@ -13,7 +13,7 @@ TIMESTAMP=$(date +%F-%H-%M-%S)
 SCRIPT_DIR=$PWD
 
 mkdir -p $LOG_FOLDER
- echo "script started at : $TIMESTAMP " | tee -e $LOG_FILE
+ echo "script started at : $TIMESTAMP " | tee -a $LOG_FILE
 
 # check the user has root priveleges or not
 if [ $USERID -ne 0 ]
@@ -26,10 +26,10 @@ if
 VALIDATE(){
 if [ $1 -eq 0 ]
 then 
- echo "$2...$G success " | tee -r $LOG_FILE
+ echo "$2...$G success " | tee -a $LOG_FILE
 
 else 
- eccho "$2... $R Failure " | tee -r $LOG_FILE
+ eccho "$2... $R Failure " | tee -a $LOG_FILE
 fi 
 }
 
