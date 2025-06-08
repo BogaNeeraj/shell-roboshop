@@ -1,16 +1,14 @@
 [Unit]
-Description=Cart Service
-
+Description = Cart Service
 [Service]
 User=roboshop
-
+// highlight-start
 Environment=REDIS_HOST=redis.neeraj.sbs
 Environment=CATALOGUE_HOST=catalogue.neeraj.sbs
 Environment=CATALOGUE_PORT=8080
-
+// highlight-end
 ExecStart=/bin/node /app/server.js
 SyslogIdentifier=cart
-Restart=always
 
 [Install]
 WantedBy=multi-user.target
