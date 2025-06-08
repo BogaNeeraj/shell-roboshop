@@ -26,10 +26,10 @@ fi
 VALIDATE(){
 if [ $1 -eq 0 ]
 then 
- echo -e "$2...$G success " | tee -a $LOG_FILE
+ echo -e "$2...$G success $N" | tee -a $LOG_FILE
 
 else 
- echo -e "$2... $R Failure " | tee -a $LOG_FILE
+ echo -e "$2... $R Failure $N" | tee -a $LOG_FILE
 fi 
 }
 
