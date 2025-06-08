@@ -77,7 +77,7 @@ VALIDATE $? "Started the services"
 START_TIME=$(date +%s)
 TOTAL_TIME=$(( $END_TIME - $START_TIME ))
 
-echo " script executed successfully, $Y time taken : $TOTAL_TIME seconds $N " | tee -e $LOG_FILE
+echo " script executed successfully, $Y time taken : $TOTAL_TIME seconds $N " | tee -a $LOG_FILE
 
 
 
