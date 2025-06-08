@@ -72,8 +72,7 @@ systemctl enable catalogue &>>$LOG_FILE
 systemctl start catalogue &>>$LOG_FILE
 VALIDATE $? "Catalogue service started successfully"
 
-cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service 
-
+cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo 
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "Installing the mongod client"
 
