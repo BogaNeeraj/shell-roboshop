@@ -71,19 +71,4 @@ cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "Installing the mongod client"
 
-mongosh --host mongodb.neeraj.sbs </app/db/master-data.js &>>$LOG_FILE
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+mongosh --host mongodb.neeraj.sbs </app/db/master-data.js 
