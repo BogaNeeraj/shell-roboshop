@@ -29,7 +29,7 @@ then
  echo -e "$2...$G success " | tee -a $LOG_FILE
 
 else 
- eccho -e "$2... $R Failure " | tee -a $LOG_FILE
+ echo -e "$2... $R Failure " | tee -a $LOG_FILE
 fi 
 }
 
