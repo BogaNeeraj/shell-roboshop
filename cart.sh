@@ -65,7 +65,7 @@ VALIDATE $? "unzip the cart"
 npm install &>>$LOG_FILE
 VALIDATE $? "downloading the dependencies"
 
-cp $SCRIPT_DIR/car.service /etc/systemd/system/cart.service
+cp $SCRIPT_DIR/cart.service /etc/systemd/system/cart.service
 VALIDATE $? "copying the services"
 
 systemctl daemon-reload &>>$LOG_FILE
