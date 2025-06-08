@@ -5,7 +5,7 @@ Description=Cart Service
 User=roboshop
 
 Environment=REDIS_HOST=redis.neeraj.sbs
-Environment=CATALOGUE_HOST=catalogue.neeraj.service
+Environment=CATALOGUE_HOST=catalogue.neeraj.sbs
 Environment=CATALOGUE_PORT=8080
 
 ExecStart=/bin/node /app/server.js
