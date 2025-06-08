@@ -79,7 +79,7 @@ END_TIME=$(date +%s)
 
 TOTAL_TIME=$(( $END_TIME - $START_TIME ))
 
-echo " script executed successfully, $Y time taken : $TOTAL_TIME seconds $N " | tee -a $LOG_FILE
+echo -e " script executed successfully, $Y time taken : $TOTAL_TIME seconds $N " | tee -a $LOG_FILE
 
 
 
