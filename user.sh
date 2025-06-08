@@ -56,7 +56,7 @@ VALIDATE $? "Created the directory"
 curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip &>> $LOG_FILE
 VALIDATE $? "Downloaded the user"
 
-re -rf /app/*
+rm -rf /app/*
 cd /app 
 unzip /tmp/user.zip &>> $LOG_FILE
 VALIDATE $? "Unzip the user"
@@ -75,7 +75,7 @@ systemctl start user &>> $LOG_FILE
 VALIDATE $? "Started the services"
 
 START_TIME=$(date +%s)
-TOTAL_TIME=(( $END_TIME - $START_TIME ))
+TOTAL_TIME=$(( $END_TIME - $START_TIME ))
 
 echo " script executed successfully, $Y time taken : $TOTAL_TIME seconds $N " | tee -e $LOG_FILE
 
