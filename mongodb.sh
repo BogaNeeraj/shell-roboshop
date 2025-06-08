@@ -14,7 +14,7 @@ TIMESTAMP=TIMESTAMP=$(date +%F-%H-%M-%S)
 mkdir -p $LOGS_FOLDER
 echo "script starting at: $TIMESTAMP " | tee -a $LOG_FILE
 
-if[ $USERID -ne 0 ]
+if [ $USERID -ne 0 ]
 then 
  echo "$R ERROR:: please run this as root user $N"
  exit 1
