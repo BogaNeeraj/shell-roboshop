@@ -21,7 +21,7 @@ then
  echo "$R error:: please run the script with the root user $N"
 else
  echo "$G script started with root user $N"
-if
+fi
 
 VALIDATE(){
 if [ $1 -eq 0 ]
