@@ -35,16 +35,16 @@ fi
 
 dnf module disable nodejs -y &>> $LOG_FILE
 VALIDATE $? "Disabling the services"
-dnf module enable nodejs:20 -y $LOG_FILE
+dnf module enable nodejs:20 -y &>>$LOG_FILE
 VALIDATE $? "Enabling the services"
 
-dnf install nodejs -y
+dnf install nodejs -y &>>$LOG_FILE
 VALIDATE $? "Installing the nodejs"
  
 id roboshop
 if [ $? -ne 0 ]
 then 
- useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+ useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
  VALIDATE $? "Creating the user"
  echo "creating the user"
 else 
@@ -54,7 +54,7 @@ fi
 mkdir -p /app 
 VALIDATE $? "Creating the directory"
 
-curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
+curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip &>>$LOG_FILE
 VALIDATE $? "Downloadin the cart"
 
 rm -rf /app/*
@@ -62,17 +62,17 @@ cd /app
 unzip /tmp/cart.zip
 VALIDATE $? "unzip the cart"
 
-npm install
+npm install &>>$LOG_FILE
 VALIDATE $? "downloading the dependencies"
 
 cp $SCRIPT_DIR/car.service /etc/systemd/system/cart.service
 VALIDATE $? "copying the services"
 
-systemctl daemon-reload
+systemctl daemon-reload &>>$LOG_FILE
 VALIDATE $? "Reload the services"
 
-systemctl enable cart 
-systemctl start cart
+systemctl enable cart &>>$LOG_FILE
+systemctl start cart &>>$LOG_FILE
 VALIDATE $? "Starting the servies"
 
 END_TIME=$(date +%s)
