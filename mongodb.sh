@@ -9,7 +9,7 @@ N="\e[0m"
 LOGS_FOLDER="/var/log/roboshop-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOG_FOLDER/$SCRIPT_NAME.log"
-TIMESTAMP=TIMESTAMP=$(date +%F-%H-%M-%S)
+TIMESTAMP=$(date +%F-%H-%M-%S)
 
 mkdir -p $LOGS_FOLDER
 echo "script starting at: $TIMESTAMP " | tee -a $LOG_FILE
