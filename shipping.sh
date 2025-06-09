@@ -55,10 +55,14 @@ else
  echo -e "system user is already created... $Y Skipping $N " 
 fi
 
+# rm -rf /app/*
+# cd /app 
+# unzip /tmp/shipping.zip &>> $LOG_FILE
+# VALIDATE $? "Unzipping the files"
 rm -rf /app/*
 cd /app 
-unzip /tmp/shipping.zip &>> $LOG_FILE
-VALIDATE $? "Unzipping the files"
+unzip /tmp/shipping.zip &>>$LOG_FILE
+VALIDATE $? "unzipping shipping"
 
 mvn clean package &>> $LOG_FILE
 VALIDATE $? "Cleaing the maven package"
