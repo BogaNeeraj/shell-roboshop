@@ -40,14 +40,14 @@ VALIDATE(){
 cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
 VALIDATE $? "Copying the repo"
 
-dnf install rabbitmq-server -y >>& $LOG_FILE
+dnf install rabbitmq-server -y &>> $LOG_FILE
 VALIDATE $? "Installing the rabbitmq server"
 
-systemctl enable rabbitmq-server >>& $LOG_FILE
-systemctl start rabbitmq-server >>& $LOG_FILE
+systemctl enable rabbitmq-server &>> $LOG_FILE
+systemctl start rabbitmq-server &>> $LOG_FILE
 VALIDATE $? "Starting the server"
 
-rabbitmqctl add_user roboshop RABBITMQ_PASSWORD >>& $LOG_FILE
+rabbitmqctl add_user roboshop RABBITMQ_PASSWORD &>> $LOG_FILE
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
 
 END_TIME=$(date +%s)
