@@ -33,21 +33,21 @@ else
 fi 
 }
 
-dnf module disable nginx -y #&>>$LOG_FILE
+dnf module disable nginx -y &>>$LOG_FILE
 VALIDATE $? "Disabled nginx"
-dnf module enable nginx:1.24 -y #&>>$LOG_FILE
+dnf module enable nginx:1.24 -y &>>$LOG_FILE
 VALIDATE $? "Enbaled nginx"
-dnf install nginx -y #&>>$LOG_FILE
+dnf install nginx -y &>>$LOG_FILE
 VALIDATE $? "Installed nginx"
 
-systemctl enable nginx #&>>$LOG_FILE
-systemctl start nginx #&>>$LOG_FILE
+systemctl enable nginx &>>$LOG_FILE
+systemctl start nginx &>>$LOG_FILE
 VALIDATE $? "Nginx started"
 
 rm -rf /usr/share/nginx/html/* 
 VALIDATE $? "Removing the default content"
 
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip #&>>$LOG_FILE
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$LOG_FILE
 VALIDATE $? "Download the content"
 
 cd /usr/share/nginx/html 
