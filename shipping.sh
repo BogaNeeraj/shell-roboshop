@@ -85,9 +85,9 @@ VALIDATE $? "Starting the shipping"
 dnf install mysql -y &>> $LOG_FILE
 VALIDATE $? "Installing the mysql"
 
-mysql -h mysql.neeraj.sbs -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/schema.sql &>> $LOG_FILE
-mysql -h mysql.neeraj.sbs -uroot -p$MYSQL_ROOT_PASSWORD  < /app/db/app-user.sql &>> $LOG_FILE
-mysql -h mysql.neeraj.sbs -uroot -p$MYSQL_ROOT_PASSWORD  < /app/db/master-data.sql &>> $LOG_FILE
+mysql -h mysql.neeraj.sbs -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/schema.sql &>>$LOG_FILE
+mysql -h mysql.neeraj.sbs -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/app-user.sql  &>>$LOG_FILE
+mysql -h mysql.neeraj.sbs -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/master-data.sql &>>$LOG_FILE
 VALIDATE $? "Loading the data"
 
 systemctl restart shipping &>> $LOG_FILE
