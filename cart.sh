@@ -66,6 +66,7 @@ npm install &>>$LOG_FILE
 VALIDATE $? "downloading the dependencies"
 
 cp $SCRIPT_DIR/cart.service /etc/systemd/system/cart.service
+
 VALIDATE $? "copying the services"
 
 systemctl daemon-reload &>>$LOG_FILE
@@ -79,7 +80,7 @@ END_TIME=$(date +%s)
 
 TOTAL_TIME=$(( $END_TIME - $START_TIME ))
 
-echo -e " script executed successfully, $Y time taken : $TOTAL_TIME seconds $N " | tee -a $LOG_FILE
+echo " script executed successfully, $Y time taken : $TOTAL_TIME seconds $N " | tee -a $LOG_FILE
 
 
 
