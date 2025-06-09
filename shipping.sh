@@ -23,7 +23,7 @@ else
     echo "You are running with root access" | tee -a $LOG_FILE
 fi
 
-echo "please enter the root password"
+echo "please enter the root password for setup"
 read -s MYSQL_ROOT_PASSWORD
 
 # validate functions takes input as exit status, what command they tried to install
@@ -85,11 +85,16 @@ VALIDATE $? "Starting the shipping"
 dnf install mysql -y &>> $LOG_FILE
 VALIDATE $? "Installing the mysql"
 
-mysql -h mysql.neeraj.sbs -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/schema.sql &>>$LOG_FILE
-mysql -h mysql.neeraj.sbs -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/app-user.sql  &>>$LOG_FILE
-mysql -h mysql.neeraj.sbs -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/master-data.sql &>>$LOG_FILE
-VALIDATE $? "Loading the data"
-
+mysql -h mysql.neeraj.sbs -u root -pRoboShop@1 -e 'use cities'
+if [ $? -ne 0 ]
+then
+ mysql -h mysql.neeraj.sbs -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/schema.sql &>>$LOG_FILE
+ mysql -h mysql.neeraj.sbs -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/app-user.sql  &>>$LOG_FILE
+ mysql -h mysql.neeraj.sbs -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/master-data.sql &>>$LOG_FILE
+ VALIDATE $? "Loading the data"
+else
+    echo -e "Data is already loaded into MySQL ... $Y SKIPPING $N"
+fi
 systemctl restart shipping &>> $LOG_FILE
 VALIDATE $? "Restarting the services"
 
