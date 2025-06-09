@@ -51,12 +51,12 @@ curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v
 VALIDATE $? "Download the content"
 
 cd /usr/share/nginx/html 
-unzip /tmp/frontend.zip #&>>$LOG_FILE
+unzip /tmp/frontend.zip &>>$LOG_FILE
 VALIDATE $? "Unzipping frontend"
 
 rm -rf /etc/nginx/nginx.conf
 cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf
 VALIDATE $? "Copied the cconfing file"
 
-systemctl restart nginx #&>>$LOG_FILE
+systemctl restart nginx &>>$LOG_FILE
 VALIDATE $? "Restart the nginx"
